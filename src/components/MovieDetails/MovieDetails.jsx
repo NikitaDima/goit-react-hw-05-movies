@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { fetchMovieDetails } from 'serveses/api';
 
-export default function MovieDetails() {
+function MovieDetails() {
   const { id } = useParams;
   const [movie, setMovie] = useState(null);
 
@@ -28,6 +28,7 @@ export default function MovieDetails() {
   return (
     <main>
       <h2>{movie.title}</h2>
+      {movie.poster && <img src={movie.poster} alt={movie.title} />}
       <p>{movie.overview}</p>
       <p>Рейтинг: {movie.vote_average}</p>
       <p>Дата виходу: {movie.release_date}</p>
@@ -42,3 +43,5 @@ export default function MovieDetails() {
     </main>
   );
 }
+
+export default MovieDetails;

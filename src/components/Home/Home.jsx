@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-
 import { fetchTrendingMovies } from 'serveses/api';
+import MoviesList from './MoviesList';
 
-export default function Home() {
+function Home() {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -22,11 +21,17 @@ export default function Home() {
   return (
     <div>
       <h2>Найпопулярніші фільми</h2>
-      {movies.map(movie => (
-        <div key={movie.id}>
-          <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+      {movies.length && (
+        <div>
+          <ul style={{ listStyle: 'none' }}>
+            {movies.map(({ id, title }) => (
+              <MoviesList key={id} title={title}></MoviesList>
+            ))}
+          </ul>
         </div>
-      ))}
+      )}
     </div>
   );
 }
+
+export default Home;

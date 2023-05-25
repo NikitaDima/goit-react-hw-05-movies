@@ -25,10 +25,6 @@ export const App = () => {
           path="/movies/:movieId/reviews"
           element={<Reviews></Reviews>}
         ></Route>
-        {/* <Route path="/movies/:movieId" element={<MovieDetails></MovieDetails>}>
-          <Route path="cast" element={<Cast></Cast>} />
-          <Route path="reviews" element={<Reviews></Reviews>} />
-        </Route> */}
       </Routes>
     </div>
   );

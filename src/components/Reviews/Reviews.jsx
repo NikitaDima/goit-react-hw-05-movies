@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieReviews } from 'serveses/api';
 
-export default function Reviews({ match }) {
+function Reviews() {
   const { id } = useParams;
   const [reviews, setReviews] = useState([]);
 
@@ -31,3 +31,5 @@ export default function Reviews({ match }) {
     </div>
   );
 }
+
+export default Reviews;

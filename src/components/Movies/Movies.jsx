@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchSearchMovies } from 'serveses/api';
 
-export default function Movies() {
+ function Movies() {
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
 
@@ -39,3 +39,5 @@ export default function Movies() {
     </div>
   );
 }
+
+export default Movies;
