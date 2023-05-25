@@ -1,45 +1,44 @@
-// import { useEffect, useState } from 'react';
-// import axios from 'axios';
-// import { Link } from 'react-router-dom';
-// const API_KEY = 'myKey';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-// export default function MovieDetails({ match }) {
-//   const movieId = match.params.movieId;
-//   const [movie, setMovie] = useState(null);
+import { Link } from 'react-router-dom';
+import { fetchMovieDetails } from 'serveses/api';
 
-//   useEffect(() => {
-//     const fetchMovieDetails = async () => {
-//       try {
-//         const response = await axios.get(
-//           `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`
-//         );
-//         setMovie(response.data);
-//       } catch (error) {
-//         console.error(error);
-//       }
-//     };
+export default function MovieDetails() {
+  const { id } = useParams;
+  const [movie, setMovie] = useState(null);
 
-//     fetchMovieDetails();
-//   }, [movieId]);
+  useEffect(() => {
+    const fetchDetails = async () => {
+      try {
+        const movieDetails = await fetchMovieDetails(id);
+        setMovie(movieDetails);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-//   if (!movie) {
-//     return <div>Завантаження...</div>;
-//   }
+    fetchDetails();
+  }, [id]);
 
-//   return (
-//     <main>
-//               <h2>{movie.title}</h2>
-//       <p>{movie.overview}</p>
-//       <p>Рейтинг: {movie.vote_average}</p>
-//       <p>Дата виходу: {movie.release_date}</p>
-//       <ul>
-//         <li>
-//             <Link></Link>
-//         </li>
-//         <li>
-//             <Link></Link>
-//         </li>
-//       </ul>
-//     </main>
-//   );
-// }
+  if (!movie) {
+    return <div>Завантаження...</div>;
+  }
+
+  return (
+    <main>
+      <h2>{movie.title}</h2>
+      <p>{movie.overview}</p>
+      <p>Рейтинг: {movie.vote_average}</p>
+      <p>Дата виходу: {movie.release_date}</p>
+      <ul>
+        <li>
+          <Link to="cast">Cast</Link>
+        </li>
+        <li>
+          <Link to="reviews">Reviews</Link>
+        </li>
+      </ul>
+    </main>
+  );
+}

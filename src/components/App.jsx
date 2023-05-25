@@ -16,34 +16,20 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Home></Home>} />
         <Route path="/movies" element={<Movies></Movies>} />
-        <Route path="/movies/:movieId" element={<MovieDetails></MovieDetails>}>
+        <Route
+          path="/movies/:movieId"
+          element={<MovieDetails></MovieDetails>}
+        ></Route>
+        <Route path="/movies/:movieId/cast" element={<Cast></Cast>}></Route>
+        <Route
+          path="/movies/:movieId/reviews"
+          element={<Reviews></Reviews>}
+        ></Route>
+        {/* <Route path="/movies/:movieId" element={<MovieDetails></MovieDetails>}>
           <Route path="cast" element={<Cast></Cast>} />
           <Route path="reviews" element={<Reviews></Reviews>} />
-        </Route>
+        </Route> */}
       </Routes>
     </div>
-    // <Routes>
-    //   <div>
-    //     <nav>
-    //       <ul>
-    //         <li>
-    //           <Link to="/">Домашня сторінка</Link>
-    //         </li>
-    //         <li>
-    //           <Link to="/movies">Пошук кінофільмів</Link>
-    //         </li>
-    //       </ul>
-    //     </nav>
-
-    //     {/* <Switch> */}
-    //     <Route exact path="/" component={Home} />
-    //     <Route exact path="/movies" component={Movies} />
-    //     <Route exact path="/movies/:movieId" component={MovieDetails} />
-    //     <Route exact path="/movies/:movieId/cast" component={Cast} />
-    //     <Route exact path="/movies/:movieId/reviews" component={Reviews} />
-    //     {/* <Redirect to="/" /> */}
-    //     {/* </Switch> */}
-    //   </div>
-    // </Routes>
   );
 };
