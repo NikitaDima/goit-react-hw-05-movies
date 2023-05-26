@@ -1,0 +1,53 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn {
+  width: 60px;
+  font-size: 12px;
+}
+
+.poster {
+  margin-right: 20px;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.rating {
+  font-weight: bold;
+}
+
+.overview {
+  margin-bottom: 20px;
+}
+
+.genres {
+  list-style: none;
+  padding: 0;
+}
+
+.genres li {
+  margin-bottom: 5px;
+}
+
+.additional-info {
+  margin-top: 20px;
+}
+
+.additional-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.additional-info ul li {
+  margin-bottom: 10px;
+}

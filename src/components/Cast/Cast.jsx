@@ -7,16 +7,14 @@ function Cast() {
   const [cast, setCast] = useState([]);
 
   useEffect(() => {
-    const fetchCredits = async () => {
-      try {
-        const movieCast = fetchMovieCredits(id);
-        setCast(movieCast);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchCredits();
+    fetchMovieCredits(id)
+      .then(fetchCredits => {
+        setCast(fetchCredits);
+      })
+      .catch(error => {
+        console.log(error);
+        setCast([]);
+      });
   }, [id]);
 
   return (
