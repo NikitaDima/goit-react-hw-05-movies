@@ -3,20 +3,18 @@ import { useParams } from 'react-router-dom';
 import { fetchMovieReviews } from 'serveses/api';
 
 function Reviews() {
-  const { id } = useParams;
+  const { id } = useParams();
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const movieReviews = fetchMovieReviews(id);
-        setReviews(movieReviews);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchReviews();
+    fetchMovieReviews(id)
+      .then(fetchReviews => {
+        setReviews(fetchReviews);
+      })
+      .catch(error => {
+        console.log(error);
+        setReviews([]);
+      });
   }, [id]);
 
   return (

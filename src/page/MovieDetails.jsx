@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Outlet, useParams, Link, useLocation } from 'react-router-dom';
 
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { fetchMovieDetails } from 'serveses/api';
 
 import css from './MovieDetails.module.css';
 
-const imageUrl = 'https://image.tmdb.org/t/p/w200';
+const imageUrl = 'https://image.tmdb.org/t/p/w300';
 
 function MovieDetails() {
   const { id } = useParams();
   const [movie, setMovie] = useState([]);
+  // const location = useLocation();
 
   useEffect(() => {
     fetchMovieDetails(id)
@@ -23,11 +24,15 @@ function MovieDetails() {
       });
   }, [id]);
 
+  const goBack = () => {};
+
   return (
     <main>
       <section className={css.container}>
         <div className={css.wrapper}>
-          <button className={css.btn}>Go back</button>
+          <button className={css.btn} onClick={goBack}>
+            Go back
+          </button>
           {movie.poster_path && (
             <img
               className={css.poster}
@@ -61,6 +66,7 @@ function MovieDetails() {
             <Link to="reviews">Reviews</Link>
           </li>
         </ul>
+        <Outlet />
       </section>
     </main>
   );

@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovieCredits } from 'serveses/api';
 
+const imageUrl = 'https://image.tmdb.org/t/p/w200';
+
 function Cast() {
   const { id } = useParams();
   const [cast, setCast] = useState([]);
@@ -19,11 +21,12 @@ function Cast() {
 
   return (
     <div>
-      <h2>Акторський склад</h2>
+      <h2>Cast</h2>
       {cast.map(actor => (
         <div key={actor.id}>
+          <img src={imageUrl + actor.profile_path} alt={actor.name} />
           <h3>{actor.name}</h3>
-          <p>Персонаж: {actor.character}</p>
+          <p>Character: {actor.character}</p>
         </div>
       ))}
     </div>

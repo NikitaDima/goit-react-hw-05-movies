@@ -19,7 +19,6 @@ function Movies() {
     fetchSearchMovies(query)
       .then(searchMovies => {
         setMovies(searchMovies);
-        updateQueryString(query);
       })
       .catch(error => {
         console.log(error);
@@ -34,20 +33,20 @@ function Movies() {
     }
   }, [searchParams]);
 
-  const updateQueryString = name => {
-    const nextParams = name !== '' ? { query: name } : {};
-    setSearchParams(nextParams);
+  const updateQueryString = e => {
+    if (e.target.value === '') {
+      setQuery('');
+      return setSearchParams({});
+    }
+    setQuery(e.target.value);
+    setSearchParams(e.target.value);
   };
 
   return (
     <div>
       <h2>Пошук кінофільмів</h2>
       <form onSubmit={handleOnSubmit}>
-        <input
-          type="text"
-          value={query}
-          onChange={e => setQuery(e.target.value)}
-        />
+        <input type="text" value={query} onChange={updateQueryString} />
         <button type="submit">Пошук</button>
       </form>
       {movies.map(movie => (

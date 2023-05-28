@@ -39,6 +39,7 @@ export const fetchMovieCredits = async id => {
     page: 1,
   };
   const response = await axios.get(`/movie/${id}/credits`, { params });
+
   return response.data.cast;
 };
 
@@ -47,6 +48,7 @@ export const fetchMovieReviews = async id => {
     api_key: API_KEY,
     page: 1,
   };
+
   const response = await axios.get(`/movie/${id}/reviews`, { params });
   return response.data.results;
 };
