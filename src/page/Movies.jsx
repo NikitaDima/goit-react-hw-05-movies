@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import { fetchSearchMovies } from 'serveses/api';
 
 function Movies() {
@@ -7,13 +7,8 @@ function Movies() {
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleOnSubmit = e => {
-    e.preventDefault();
-    if (query.trim() === '') {
-      return;
-    }
-    performSearch();
-  };
+  const queryParam = searchParams.get('query') ?? '';
+  const location = useLocation();
 
   const performSearch = () => {
     fetchSearchMovies(query)
@@ -27,11 +22,29 @@ function Movies() {
   };
 
   useEffect(() => {
-    const queryParam = searchParams.get('query') ?? '';
-    if (queryParam) {
-      setQuery(queryParam);
+    setMovies([]);
+
+    if (queryParam !== '') {
+      fetchSearchMovies(queryParam)
+        .then(searchMovies => {
+          setMovies(searchMovies);
+        })
+        .catch(error => {
+          console.log(error);
+          setMovies([]);
+        });
     }
-  }, [searchParams]);
+    return setMovies([]);
+  }, [queryParam]);
+
+  const handleOnSubmit = e => {
+    e.preventDefault();
+    if (query.trim() === '') {
+      return;
+    }
+
+    performSearch();
+  };
 
   const updateQueryString = e => {
     if (e.target.value === '') {
@@ -39,8 +52,11 @@ function Movies() {
       return setSearchParams({});
     }
     setQuery(e.target.value);
-    setSearchParams(e.target.value);
+    setSearchParams({ query: e.target.value });
   };
+  // const visibleProducts = movies.filter(movie =>
+  //   movie.name.toLowerCase().includes(queryParam.toLowerCase())
+  // );
 
   return (
     <div>
@@ -51,7 +67,9 @@ function Movies() {
       </form>
       {movies.map(movie => (
         <div key={movie.id}>
-          <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+          <Link state={{ from: location }} to={`/movies/${movie.id}`}>
+            {movie.title}
+          </Link>
         </div>
       ))}
     </div>
