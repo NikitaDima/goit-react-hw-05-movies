@@ -3,9 +3,9 @@ import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import { fetchSearchMovies } from 'serveses/api';
 
 function Movies() {
-  const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [query, setQuery] = useState(searchParams.get('query') ?? '');
 
   const queryParam = searchParams.get('query') ?? '';
   const location = useLocation();

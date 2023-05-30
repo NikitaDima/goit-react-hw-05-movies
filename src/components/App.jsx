@@ -5,6 +5,7 @@ import Home from 'page/Home';
 import MovieDetails from 'page/MovieDetails';
 import Movies from 'page/Movies';
 import Reviews from './Reviews';
+import NoFound from 'page/NoFound';
 import { Layout } from './Layout';
 
 export const App = () => {
@@ -17,6 +18,7 @@ export const App = () => {
           <Route path="cast" element={<Cast />} />
           <Route path="reviews" element={<Reviews />} />
         </Route>
+        <Route path="*" element={<NoFound />} />
       </Route>
     </Routes>
   );
